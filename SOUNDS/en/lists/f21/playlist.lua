@@ -1,0 +1,20 @@
+title="International F-21"
+playlist={
+{"Golf Ball with 3/4 Roll on 45 Degree Up Line, Snap Roll at Top of 3/4 Loop, 3/4 Roll on 45 Down Line","man36",8},
+{"Half Reverse Cuban 8 with Consecutive Three 1/4 Rolls with the last 1/4 Roll in Opposite Direction on the 45 Degree Up Line and 3/4 Roll after the 5/8 Loop - Exit Inverted","man37",11},
+{"Horizontal Circle with Two Integrated 1/2 Rolls in Opposite Directions (first 1/2 Roll to the Inside) - Exit Inverted","man38",7},
+{"Top Hat with Consecutive Three 1/4 Rolls in Up Line, 3/4 Snap Roll in Down Line","man39",6},
+{"Pull-Push-Push Humpty Bump with 1/4 Roll Integrated into first 1/4 Pull Loop, Full Roll in Up Line, Consecutive Two 1/2 Rolls Opposite in Down Line, 1/4 Roll Integrated into last 1/4 Loop - Exit Inverted","man40",14},
+{"Three Quarter Vertical 8 with 1/2 Roll Integrated into Last 45 Degrees of Half Loop and First 45 Degrees of Loop - Exit Inverted","man41",8},
+{"Stall Turn with Consective 1/4 Roll and 1/2 Roll Opposite in Up Line and 3/4 Roll in Down Line","man42",6},
+{"Figure 9 with 1 1/2 Snap Roll in Down Line","man43",3},
+{"Top Hat with 3/4 Roll in Up Line, Full Roll Across Top, 1/4 Roll in Down Line","man44",5},
+{"Half Square Loop with 1/2 Roll on Entry Prior to Push, Consecutive 1/2 Roll and Full Roll Opposite in Up Line - Exit Inverted","man45",7},
+{"45 Degree Down Line with 1/4 Roll, Consecutive Two Snap Rolls Opposite, 1/4 Roll - Exit Inverted","man46",7},
+{"Half 8 Sided Loop with 1/2 Roll on First 45 Degree Up Line and 1/2 Roll on Second 45 Degree Up Line","man47",7},
+{"Loop with Two Consecutive Integrated Rolls in Opposite Directions","man48",4},
+{"Spin with 2 1/2 Turns","man49",1},
+{"Roll Combination with Consecutive 1/2 Roll, Four 1/4 Rolls in Opposite Direction, 1/2 Roll in Opposite Direction","man50",7},
+{"Fighter Turn with 3/4 Roll on 45 Degree Up Line and 3/4 Snap Roll on 45 Degree Down Line","man51",7},
+{"Horizontal Square Circle with 1/4 Roll on Entry (at Center), 1/2 Roll on 2nd, 3rd and 4th Lines, 1/4 Roll on Exit (at Center)","man52",9},
+}
