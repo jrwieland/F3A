@@ -13,7 +13,7 @@ playlist={
 {"Humpty bump with roll options, half roll up ","or 1/4 roll up and down"," "," ","man11",5},
 {"Two horizontal rolls"," "," "," ","man12",5},
 {"Sharks Tooth, half roll on 45 degree down line"," "," "," ","man13",5},
-{"Square Loop on Corner"," "," "," ","man14",5},}
+{"Square Loop on Corner"," "," "," ","man14",5},
 {"Half Reverse Cuban Eight"," "," "," ","man15",5},
 {"45 degree upline with 1/2 roll, exit inverted"," "," "," ","man16",5},
 {"Half square loop on corner from top, inverted entry"," "," "," ","man17",5},
