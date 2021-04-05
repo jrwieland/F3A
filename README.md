@@ -43,9 +43,18 @@ Installation
 8.  Copy the .wav files to `/SOUNDS/en`
 9.  Create a folder "lists" under `/SOUNDS`  
 10.  Copy the list folders into the newly created list directory(each of them have a pre-made playlist file in them)
+11.  Disable the throttle and F5 trims (these are the trims used to control it)
 
 The call list sounds were created using TTSAutomate availabe here https://ttsautomate.com/download.html.  
 The file to make moficiations and change the voice is located in sounds, it is called `caller.psv`.
 
-Enjoy!  Give me a star if you enjoy it.
+Usage
+-----------------
+1.  Place the SC switch in the down position (1st maneuver plays).   
+2.  (While the SC switch is down) `Press Throttle trim up` you can advance through the maneuvers consecutively (`throttle trim down` will go backwards through the list up to maneuver 1).   
+3.  Move the SC switch to the middle position, you can now advance through the list without them playing (practice from any start point).   
+4.  With it in the middle position, You can press `trim 5` up or down to change to the desired call list.    
+5.  Move the Sc to the lower (down) position to play the maneuvers.  Move the SC up and down (middle to lower) to repeat a maneuver.    
+   
+Enjoy!  Give me a star if you enjoy it.   
 If you have any issues or find something doesn't work, please create an issue, so others can benefit from the solution.
