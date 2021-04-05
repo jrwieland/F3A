@@ -19,3 +19,4 @@ playlist={
 {"Half square loop on corner from top, inverted entry"," "," "," ","man17",5},
 {"Stall Turn 3/4 roll up, 1/4 roll down"," "," "," ","man18",5},
 {"Landing"," "," "," ","man19",5},
+}
