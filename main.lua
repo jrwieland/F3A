@@ -17,7 +17,7 @@
 local currentCall = 1
 local errorOccured = false
 
-loadScript("/SOUNDS/lists/f21/playlist.lua")() --1st callList (below)
+loadScript("/SOUNDS/lists/p21/playlist.lua")() --1st callList (below)
 --Call lists folders names i.e. /SOUNDS/lists/"foldername"  below are the foldernames these can be rearranged or deleted to suit your needs.
 local callList=
 {"p21",
