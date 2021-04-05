@@ -1,0 +1,22 @@
+title="AMA Masters Contest"
+playlist={
+{"Takeoff"," "," "," ","man1",5},
+{"Cuban Eight with full rolls integrated into","the top 90 degrees of both part loops"," "," ","man2",5},
+{"Half square loop with 4 of 8 point roll"," "," "," ","man3",5},
+{"Square loop from the top with 2 of 4 point rolls"," "," "," ","man4",5},
+{"Top Hat from top with options, 1 roll down","2 of 4 point roll up"," "," ","man5",5},
+{"2-1/2 turn spin, inverted exit"," "," "," ","man6",5},
+{"Humpty bump with roll options, 1/4 or 1/2 rolls","up and down"," "," ","man7",5},
+{"Eight Point Roll"," "," "," ","man8",5},
+{"Stall Turn, Full roll up, half roll down","inverted exit"," "," ","man9",5},
+{"Top Hat 2 of 2 point Roll Up, Snap Roll On Top","2 of 4 point Roll Down"," "," ","man10",5},
+{"Half square loop on corner with 1/2 rolls","inverted exit"," "," ","man11",5},
+{"Humpty bump from top, 2 of 4 point roll down","full roll up, inverted entry Pull, Push, Push"," "," ","man12",5},
+{"Half Square with 1/2 roll"," "," "," ","man13",5},
+{"Triangular loop, from bottom, with 2 of 4 point rolls","in 45 degree legs, full roll on top"," "," ","man14",5},
+{"Humpty bump with roll options, 1/4 or 1/2 rolls","up and down, inverted exit"," "," ","man15",5},
+{"Two 3 of 4 point rolls Reversed, inverted exit"," "," "," ","man16",5},
+{"Stall Turn, 4 point roll up, half roll down"," "," "," ","man17",5},
+{"Hourglass, Middle entry top first","1 1/2 snap roll down, inverted exit"," "," ","man18",5},
+{"Landing"," "," "," ","man19",5},
+}
