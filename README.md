@@ -3,7 +3,7 @@ F3A Caller Widget Version 1.0
 *Caller for practicing F3A pattern*   
 * 4/5/2021 Program fully funcitonal !   
 
-![Screenshot](/Screen Shots/p-21.png)  
+![Screenshot](Screen Shots/p-21.png)  
 
 
 Key Features
@@ -26,12 +26,12 @@ Installation
 3.  Create a new folder under widgets and install the `main.lua` file.   
 4.  Edit the program (switch numbers [9=SC(dn)] & logical switches @ line "59") to match your desired switch use.   
 5.  Setup Timer 3 (timer was based a 3 position swicth Top position would not advance) This allows smooth scrolling through the choices.   
-![timer](/Screen Shots/timer3.png)    
+![timer](Screen Shots/timer3.png)    
 5.  Set you your logical switches.    
-![Radio LS](/Screen Shots/x12ls.png)   
-![Companion LS](/Screen Shots/compls.PNG)    
+![Radio LS](Screen Shots/x12ls.png)   
+![Companion LS](Screen Shots/compls.PNG)    
 6.  Set 2 special functions SF63 & 64 (these adjust GV 9, which keeps track of which call list your using)    
-![Companion SF](/Screen Shots/compsf.PNG)   
+![Companion SF](Screen Shots/compsf.PNG)   
 ![Radio SF](/Screen Shots/x12sf.png)   
 7.  Copy the .wav files to `/SOUNDS/en`
 8.  Create a folder "lists" under `/SOUNDS`  
