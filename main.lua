@@ -19,11 +19,15 @@ local errorOccured = false
 
 loadScript("/SOUNDS/lists/f21/playlist.lua")() --1st playlist in songList (see sample list below)
 
---Playlists folders names i.e. /SONGS/lists/"foldername"  below are placeholder names
+--Playlists folders names i.e. /SONGS/lists/"foldername"  below are placeholder names these can be rearranged or deleted to suit your needs
 local songList=
 {"f21",
 "p21",
+"ama_club",
 "ama_sportsman",
+"ama_inter",
+"ama_advanced",
+"ama_masters",
 } 
 
 --Options
@@ -35,7 +39,7 @@ local options = {
 local function create(zone, options)
   local tunes = { zone=zone, options=options}
   model.setGlobalVariable(8,0,1) -- resets GV9 to 1 upon startup
-  model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[1][5],active=0})--resets playing song on  to the 1st song on startup
+  model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[1][5],active=0})--resets playing song on  to the 1st song on startup
   return tunes
       end
 
@@ -55,31 +59,31 @@ local function background(tunes)
  end
  function refresh(tunes)
   --call list and Sequence Controls
-nextS = getValue("ls10")
-prevS = getValue("ls11")
-advS = getValue("ls12")
-revS = getValue("ls13")
-listN = getValue("ls14")
-listP = getValue("ls15")
+nextS = getValue("ls10") --Next Maneuver LS
+prevS = getValue("ls11") -- Previous Maneuver LS
+advS = getValue("ls12") -- Advance through without playing LS
+revS = getValue("ls13")  --Reverse through without playing LS
+listN = getValue("ls14")  --Next Call List LS
+listP = getValue("ls15")  --Previous Call List LS
 if advS >= 1  then
       if playingSong == #playlist then
         playingSong = #playlist
-        model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+        model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
       else
         playingSong = playingSong + 1
-			model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+			model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
 	end
   end
 		if revS >= 1  then
       if playingSong == 1 then
         playingSong = 1
-        model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+        model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
       else
         playingSong = playingSong - 1
-			model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+			model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
 	end
   end
- local selection=playingSong
+ local selection=playingSong 
 		lcd.drawText(tunes.zone.x+80, tunes.zone.y, title, MIDSIZE)
 	  lcd.drawText(tunes.zone.x+130, tunes.zone.y+30, "Maneuver No. "..selection, INVERS)
     lcd.drawText(tunes.zone.x, tunes.zone.y+50, playlist[selection][1],SMLSIZE)
@@ -99,8 +103,8 @@ if advS >= 1  then
 			lcd.drawText(tunes.zone.x+150, tunes.zone.y+50, "End of Manuevers", INVERS)
 			    else
 			playingSong = playingSong + 1
-			model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
-      playFile("/SOUNDS/en/".. playlist[playingSong][5]..".wav")
+			model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+      playFile("/SOUNDS/en/lists".. playingSong .. playlist[playingSong][5] ..".wav")
 		end
      end
 --	-- Next song
@@ -110,8 +114,8 @@ local long=playlist[playingSong][6]
       playingSong = 1
 		else
 			playingSong = playingSong - 1
-			model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
-      playFile("/SOUNDS/en/".. playlist[playingSong][5]..".wav")
+			model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+      playFile("/SOUNDS/en/lists".. playingSong .. playlist[playingSong][5] ..".wav")
 		end
 	end
 	
@@ -127,7 +131,7 @@ local long=playlist[playingSong][6]
 		set2 = songList[model.getGlobalVariable(8,0)]
 	end
 	loadScript("/SOUNDS/lists/"..set2.."/playlist.lua")()
-	model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+	model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
 	else
 	prevListSwitchPressed = false
 	end
@@ -145,7 +149,7 @@ local long=playlist[playingSong][6]
     set2 = songList[model.getGlobalVariable(8,0)]
 	end
 	loadScript("/SOUNDS/lists/"..set2.."/playlist.lua")()
-	model.setCustomFunction(3,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
+	model.setCustomFunction(61,{switch = 9,func = 11,name = playlist[playingSong][5],active =0})
   else
 		nextListSwitchPressed = false
 	end
