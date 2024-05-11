@@ -15,7 +15,9 @@ Key Features
   1. Club Contests   
   2. Sportsman   
   3. Advanced   
-  4. Masters   
+  4. Masters
+     
+[Get Release 2.0](https://github.com/jrwieland/F3A/releases/tag/v2.0) 
 
 
 ## Widget Operation
