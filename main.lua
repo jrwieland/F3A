@@ -1,7 +1,7 @@
 -- #########################################################################
----# F3A Practice Caller  V2.0                                             #
+---# F3A Practice Caller  V2.1                                             #
 ---# Developer: https://github.com/jrwieland                               #
--- # License GPLv3: http://www.gnu.org/licenses/gpl-3.0.html	              #
+-- # License GPLv3: http://www.gnu.org/licenses/gpl-3.0.html	             #
 -- #                                                                       #
 -- # This program is free software; you can redistribute it and/or modify  #
 -- # it under the terms of the GNU General Public License version 3 as     #
@@ -16,8 +16,9 @@
 --Locals
 local currentCall = 1
 local errorOccured = false
-    
-loadScript("/SOUNDS/lists/f25/playlist.lua")()--1st callList (below)
+local curTime =getRtcTime()
+
+loadScript("/SOUNDS/lists/ama_advanced/playlist.lua")()--1st callList (below)
 
 --Call lists folders names i.e. /SOUNDS/lists/"foldername"  below are the foldernames these can be rearranged or deleted to suit your needs.
 --Delete the rows that you do not use or the widget will fail since it cannot find the file
@@ -33,15 +34,16 @@ local callList=
 
 --Options
 local options = {
- { "switch", SOURCE, DEFAULT_PRACTICE_SWITCH_ID },
- { "TextColor", COLOR, COLOR_THEME_PRIMARY2 },
+  { "switch", SOURCE, DEFAULT_PRACTICE_SWITCH_ID },
+  { "TextColor", COLOR, COLOR_THEME_PRIMARY2 },
 }
 
 -- create zones
 local function create(zone, options)
   local calls = { zone=zone, options=options}
+  model.setGlobalVariable(7,0,1)
   model.setGlobalVariable(8,0,1) -- resets GV9 to 1 upon startup
-  model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[1][8],active=1,repetition=-1})
+  flushAudio()
   return calls
 end
 
@@ -56,123 +58,109 @@ end
 
 function refresh(calls)
   --call list and Sequence Controls
-  nextS = getValue("ls50") --Next Call LS
-  prevS = getValue("ls51") -- Previous Call LS
-  listN = getValue("ls52")  --Change to Next Maneuver List LS
-  listP = getValue("ls53")  --Change to Previous Maneuver List LS
+  nextS = getLogicalSwitchValue(49) --Next Call LS
+  prevS = getLogicalSwitchValue(50) -- Previous Call LS
+  listN = getLogicalSwitchValue(51)  --Change to Next Maneuver List LS
+  listP = getLogicalSwitchValue(52)  --Change to Previous Maneuver List LS
   again = getValue(calls.options.switch)
-  
+  elapsed = getRtcTime()-curTime
+
   --Move forward to Specific Maneuver
-  if nextS >=1 and again < -1 then
+  if nextS == true and again <= -1 then
     if currentCall == #playlist then
-      currentCall = #playlist
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
+      currentCall = model.setGlobalVariable(8,0,#playlist)
     else
-      currentCall = currentCall +1 
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
     end
+    currentCall = model.getGlobalVariable(8,0)
   end
-  
+
   --Move backwards to Specific Maneuver
-  if  prevS >= 1 and again < -1 then
-    if currentCall == 1 then
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
-      playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
+  if  prevS == true and again <= -1 then
+    if currentCall <= 0  then
+      model.setGlobalVariable(8,0,1)
     else
-      currentCall = currentCall - 1
-            model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
     end
+    currentCall = model.getGlobalVariable(8,0)
   end
-      
-    -- Repeat call
-    if again <= 99 and again > -1 and nextS >=1  then
-      playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
-    end
-      
+
+--    -- Repeat call
+  if again == 0 and elapsed >= 1 then
+    model.setGlobalVariable(8,0,currentCall)
+    model.setCustomFunction(59,{switch = 8,func = 11,name = playlist[currentCall][8],active=1,repetition=80})
+    curTime =getRtcTime()
+  end
+
   --Next Call
-  if nextS >=1 and again >= 1 then
+  if nextS == true and again >= 1 and elapsed >= 1 then
+    flushAudio()
     if currentCall == #playlist then
-      currentCall = #playlist
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
+      currentCall = model.setGlobalVariable(8,0,#playlist)
     else
-      currentCall = currentCall +1 
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
-      playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
     end
+    currentCall = model.getGlobalVariable(8,0)
+    playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
+    curTime =getRtcTime()
   end
-  
+
   --Previous Call
-  if  prevS >= 1 and again >= 1 then
-    if currentCall == 1 then
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
-      playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
+  if  prevS == true and again >= 1 and elapsed >= 1 then
+    if currentCall <= 1 then
+      model.setGlobalVariable(8,0,1)
     else
-      currentCall = currentCall - 1
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[currentCall][8],active=1,repetition=-1})
-      playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
     end
+    currentCall=model.getGlobalVariable(8,0)
+    playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
+    curTime =getRtcTime()
   end
-  
+
   --Change to Next Maneuver List
-  if listN > -1 then
-    if not nextListSwitchPressed then
-      if model.getGlobalVariable(8,0) >= #callList +1 then
-        set2 = callList[1] 
-        currentCall = 1	
-        model.setGlobalVariable(8,0,1)
-      else
-        currentCall = 1	
-        set2 = callList[model.getGlobalVariable(8,0)]
-      end
-      loadScript("/SOUNDS/lists/"..set2.."/playlist.lua")()
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[1][8],active=1,repetition=-1})
-      
+  if listN == true and elapsed >= 1 then
+    if model.getGlobalVariable(7,0) > #callList then
+      model.setGlobalVariable(7,0,1)
     else
-      nextListSwitchPressed = false
     end
+    loadScript("/SOUNDS/lists/"..callList[model.getGlobalVariable(7,0)].."/playlist.lua")()
+    model.setGlobalVariable(8,0,1)
+    currentCall = model.getGlobalVariable(8,0)
+    playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")     
+    curTime =getRtcTime()
   end
-  
+
 --Change to Previous Maneuver List
-  if listP > -1 then
-    if not prevListSwitchPressed then
-      if model.getGlobalVariable(8,0)<= 0 then	
-        model.setGlobalVariable(8,0,#callList)
-        currentCall = 1	
-        set2 = callList[model.getGlobalVariable(8,0)]
-      else
-        currentCall = 1	
-        set2 = callList[model.getGlobalVariable(8,0)]
-      end
-      loadScript("/SOUNDS/lists/"..set2.."/playlist.lua")()
-      model.setCustomFunction(61,{switch = 233,func = 11,name = playlist[1][8],active=1,repetition=-1})
-      
+  if listP == true and elapsed >= 1 then
+    if model.getGlobalVariable(7,0)<= 0 then	
+      model.setGlobalVariable(7,0,#callList)
     else
-      prevListSwitchPressed = false
     end
+    loadScript("/SOUNDS/lists/"..callList[model.getGlobalVariable(7,0)].."/playlist.lua")()
+    model.setGlobalVariable(8,0,1)	
+    currentCall = model.getGlobalVariable(8,0)
+    playFile("/SOUNDS/en/".. playlist[currentCall][8] ..".wav")
+    curTime =getRtcTime()
   end
-  
+
   --LCD Display
   local selection=currentCall 
   if calls.zone.w  > 200 and calls.zone.h > 165 then
-   lcd.drawText(calls.zone.x+75,calls.zone.y, title, calls.options.TextColor)
-  lcd.drawText(calls.zone.x+130, calls.zone.y+30, "Sequence No. "..selection, INVERS+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+55, playlist[selection][1],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+70, playlist[selection][2],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+85, playlist[selection][3],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+100, playlist[selection][4],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+115, playlist[selection][5],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+130, playlist[selection][6],SMLSIZE+calls.options.TextColor)
-  lcd.drawText(calls.zone.x, calls.zone.y+145, playlist[selection][7],SMLSIZE+calls.options.TextColor)
-  if selection >= #playlist then
-    lcd.drawText(calls.zone.x+130, calls.zone.y+30, "End of Sequence", INVERS)
-  end
-  else
-      lcd.drawText(calls.zone.x, calls.zone.y, title, calls.options.TextColor)
-      lcd.drawText(calls.zone.x, calls.zone.y+14, "Sequence No. "..selection, calls.options.TextColor)
+    lcd.drawText(calls.zone.x+75,calls.zone.y, title, calls.options.TextColor)
+    lcd.drawText(calls.zone.x+130, calls.zone.y+30, "Sequence No. "..selection, INVERS+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+55, playlist[selection][1],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+70, playlist[selection][2],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+85, playlist[selection][3],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+100, playlist[selection][4],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+115, playlist[selection][5],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+130, playlist[selection][6],SMLSIZE+calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+145, playlist[selection][7],SMLSIZE+calls.options.TextColor)
     if selection >= #playlist then
-    lcd.drawText(calls.zone.x, calls.zone.y+14, "End of Sequence", INVERS)
+      lcd.drawText(calls.zone.x+130, calls.zone.y+30, "End of Sequence", INVERS)
     end
-end
+  else
+    lcd.drawText(calls.zone.x, calls.zone.y, title, calls.options.TextColor)
+    lcd.drawText(calls.zone.x, calls.zone.y+14, "Sequence No. "..selection, calls.options.TextColor)
+    if selection >= #playlist then
+      lcd.drawText(calls.zone.x, calls.zone.y+14, "End of Sequence", INVERS)
+    end
+  end
 end
 
 return { name="F3A", options=options, create=create, update=update, refresh=refresh, background=background }
