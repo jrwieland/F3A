@@ -1,4 +1,4 @@
-F3A Caller Widget Version 2.0
+F3A Caller Widget Version 2.1
 ===========
 *Caller for practicing F3A pattern*   
 * Updated to 2024 Season   
@@ -17,7 +17,7 @@ Key Features
   3. Advanced   
   4. Masters
      
-[Get Release 2.0](https://github.com/jrwieland/F3A/releases/tag/v2.0) 
+[Get Release 2.1](https://github.com/jrwieland/F3A/releases/tag/v2.1) 
 
 
 ## Widget Operation
@@ -56,7 +56,7 @@ set your open logisal switches as follows
 If you don't use these please adjust the main.lua file to reflect the switches you use    
 ![Refresh](Screenshots/refresh.PNG)    
 
-*6.  Set 2 special functions SF63 & 64 (these adjust GV 9, which keeps track of which call list your using)*   The needs to match the LS you use advance through the calls i.e. 50 & 51
+*6.  Set 4 special functions SF61 - 64 (these adjust GV 8 & 9, which keeps track of which calls and maneuver lists your using)*   They needs to match the LS you use advance through the calls i.e. 50 - 53      
     
 ![Companion SF](Screenshots/compsf.PNG)      
   
